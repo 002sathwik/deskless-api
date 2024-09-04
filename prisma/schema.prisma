@@ -65,10 +65,12 @@ model Branch {
 }
 
 model Fee {
-    id     String   @id @default(cuid())
-    type   FeeType
-    amount Float
-    state  FeeState
+    id          String  @id @default(cuid())
+    type        FeeType
+    description String?
+    url         String?
+    amount      Float?  @default(0.0)
+    isPublished Boolean @default(false)
 
     FeeVerification FeeVerification[]
 
@@ -136,10 +138,6 @@ enum FeeType {
     OTHER
 }
 
-enum FeeState {
-    PUBLISHED
-    DRAFT
-}
 
 enum FeeVerificationStatus {
     SENT
