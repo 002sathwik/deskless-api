@@ -51,5 +51,5 @@ docker run -d \
   -e POSTGRES_USER="postgres" \
   -e POSTGRES_PASSWORD="$DB_PASSWORD" \
   -e POSTGRES_DB=deskless-api \
-  -p "$DB_PORT":5432 \
+  -p "8000":5432 \
   docker.io/postgres && echo "Database container '$DB_CONTAINER_NAME' was successfully created"
