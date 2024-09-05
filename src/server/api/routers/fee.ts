@@ -61,7 +61,6 @@ const feeRouter = createTRPCRouter({
             })
         }
     }),
-
     toogleFeeState: protectedProcedure.input(toggleStateZ).mutation(async ({ ctx, input }) => {
         const state = await ctx.db.fee.findUnique({
             where: {
@@ -77,7 +76,6 @@ const feeRouter = createTRPCRouter({
             }
         })
     }),
-
     getPublishedFee: protectedProcedure.query(async ({ ctx }) => {
         return await ctx.db.fee.findMany({
             where: {
@@ -95,7 +93,6 @@ const feeRouter = createTRPCRouter({
             }
         })
     })
-
 })
 
 export default feeRouter

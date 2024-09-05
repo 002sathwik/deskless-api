@@ -138,7 +138,6 @@ enum FeeType {
     OTHER
 }
 
-
 enum FeeVerificationStatus {
     SENT
     VERIFIED

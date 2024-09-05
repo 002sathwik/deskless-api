@@ -45,6 +45,10 @@ const certificateRouter = createTRPCRouter({
                 ...input
             }
         })
+    }),
+
+    getCertificates: protectedProcedure.query(async ({ ctx }) => {
+        return await ctx.db.certificate.findMany()
     })
 })
 
