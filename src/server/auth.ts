@@ -31,6 +31,7 @@ declare module "next-auth" {
     accessToken: string;
     refreshToken: string;
     id: number;
+    usn: string;
     name: string;
     email: string;
     role: Role;
@@ -40,6 +41,7 @@ declare module "next-auth" {
     accessToken: string;
     refreshToken: string;
     id: number;
+    usn: string;
     name: string;
     email: string;
     role: Role;
@@ -50,6 +52,7 @@ declare module "next-auth" {
       id: number;
       name: string;
       email: string;
+      usn: string;
       role: Role;
       accessToken: string;
       refreshToken: string;
@@ -66,7 +69,7 @@ declare module "next-auth/jwt" {
     name: string;
     email: string;
     role: Role;
-
+    usn: string;
     iat: number;
     exp: number;
     accessToken: string;
@@ -90,6 +93,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           email: user.email,
           role: user.role,
+          usn: user.usn,
           accessToken: user.accessToken,
           refreshToken: user.refreshToken,
           iat: Math.floor(Date.now() / 1000),
@@ -128,6 +132,7 @@ export const authOptions: NextAuthOptions = {
       if (token.sub && session.user) {
         session.user.id = parseInt(token.sub);
         session.user.name = token.name;
+        session.user.usn = token.usn;
         session.user.email = token.email;
         session.user.role = token.role;
         session.accessToken = token.accessToken;
