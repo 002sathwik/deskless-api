@@ -1,4 +1,4 @@
-import { addApplicationZ,  setApplicationState, updateApplicationZ } from "~/zod/applicationZ";
+import { addApplicationZ, setApplicationState, updateApplicationZ } from "~/zod/applicationZ";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 import { TRPCError } from '@trpc/server';
 
@@ -11,6 +11,7 @@ const applicationRouter = createTRPCRouter({
                 branch: input.branch,
                 sem: input.sem,
                 purpose: input.purpose,
+                paymentStatus: "PROCESSING",
                 status: "SENT",
                 Certificate: {
                     connect: {
@@ -64,6 +65,9 @@ const applicationRouter = createTRPCRouter({
     }),
     getcertificateForAdmin: protectedProcedure.query(async ({ ctx }) => {
         return await ctx.db.application.findMany({
+            where: {
+                paymentStatus: "COMPLETED"
+            },
             include: {
                 Certificate: true,
                 User: true
@@ -76,7 +80,8 @@ const applicationRouter = createTRPCRouter({
     getcertificateForUser: protectedProcedure.query(async ({ ctx }) => {
         return await ctx.db.application.findMany({
             where: {
-                userId: ctx.session.user.id
+                userId: ctx.session.user.id,
+                paymentStatus: "COMPLETED"
             },
             include: {
                 Certificate: true,

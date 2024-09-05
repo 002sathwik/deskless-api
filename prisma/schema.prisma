@@ -128,7 +128,7 @@ model Application {
     User   User? @relation(fields: [userId], references: [id])
     userId Int?
 
-    paymentStatus PayStatus
+    paymentStatus PayStatus @default(PROCESSING)
 
     paymentId String?  @unique
     Payment   Payment? @relation(fields: [paymentId], references: [id])
@@ -148,9 +148,9 @@ model Payment {
     razorpayPaymentId String
     razorpaySignature String
 
-    createdAt   DateTime     @default(now())
-    updatedAt   DateTime     @updatedAt
-    Application Application?
+    createdAt     DateTime     @default(now())
+    updatedAt     DateTime     @updatedAt
+    ApplicationId Application?
 }
 
 enum PaymentType {
