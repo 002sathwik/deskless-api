@@ -11,14 +11,15 @@ const addFeeVerficationZ = z.object({
     status: z.nativeEnum(FeeVerificationStatus),
     feeId: z.string()
 })
-
 const updateVerficationState = z.object({
     id: z.number(),
     status: z.nativeEnum(FeeVerificationStatus)
 })
-
-
+const getVerficationsForAccountantByState = z.object({
+    status: z.nativeEnum(FeeVerificationStatus)
+})
 export {
     addFeeVerficationZ,
-    updateVerficationState
+    updateVerficationState,
+    getVerficationsForAccountantByState
 }
